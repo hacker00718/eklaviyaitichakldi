@@ -1,0 +1,183 @@
+<!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ITI ID Card Generator</title>
+  <style>
+    body {
+      background: ORANGE;
+      font-family: 'Segoe UI', sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+    }
+    h1 {
+  color: black;
+  font-size: 32px; /* or another readable size */
+    }
+    .id-card {
+      width: 240px;
+      height: 350px;
+      background: linear-gradient(135deg, #ffffff 50%, #f1e5dd 50%);
+      border-radius: 15px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      padding: 25px;
+      text-align: center;
+      position: relative;
+    }
+    .id-card img.logo {
+      width: 100px;
+      height: 80px;
+      border-radius:15px 0px 20px 0px;
+      border: 3px  white;
+      object-fit: cover;
+      width: 80px;
+      position: absolute;
+      top: 10px;
+      left: 6px;
+    }
+    .id-card img.profile-pic {
+      width: 100px;
+      height: 100px;
+      border-radius: 100%;
+      border: 3px solid #ff407d;
+      object-fit: cover;
+    }
+    .name {
+      font-size: 20px;
+      font-weight: bold;
+      margin-top: 10px;
+      color: #8c6c35;
+    }
+    .class {
+      color: #d52a6a;
+      font-weight: bold;
+      font-size: 16px;
+    }
+    .details {
+      text-align: center;
+      margin-top: 10px;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+    .footer {
+      margin-top: 10px;
+      border-top: 1px solid #ccc;
+      padding-top: 10px;
+      font-size: 14px;
+    }
+    .footer .school {
+      text-align: center;
+      font-size: 15px;
+      color: white;
+      background: #C2185B;
+      width: 240px;
+      padding: 3px;
+      border-radius: 15px;
+      margin: 0 auto 10px auto;
+      font-weight: bold;
+      color: white;
+    }
+    .input-area {
+      margin-top: 20px;
+      max-width: 320px;
+      width: 100%;
+    }
+    .input-area input {
+      width: 100%;
+      margin: 5px 0;
+      padding: 8px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+    .input-area button {
+      width: 100%;
+      padding: 10px;
+      background-color: #ff407d;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      margin-top: 10px;
+    }
+    .button-container {
+      margin-top: 20px;
+      text-align: center;
+    }
+    .btn {
+      padding: 10px 20px;
+      background: #007bff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin: 5px;
+    }
+  </style>
+</head>
+<body>  <div class="input-area">
+ <div class="form-box">
+    <h1><mark><b><u>ID CARD FORM </u></b></mark></h1>
+    <input type="text" id="studentName" placeholder="Student Name">
+    <input type="text" id="class" placeholder="Trade">
+    <input type="text" id="fatherName" placeholder="Father's Name">
+    <input type="text" id="motherName" placeholder="Mother's Name">
+    <input type="text" id="address" placeholder="Address">
+    <input type="text" id="phone" placeholder="Phone Number">
+    <input type="file" id="photoInput" accept="image/*">
+    <button onclick="generateID()">Generate ID Card</button>
+<br><br>
+  </div>  <div class="id-card" id="idCard" style="display: none;">
+<img src="iti-logo.png" class="logo" alt="Institute Logo">
+    <img id="profilePic" class="profile-pic" src="" alt="Student Photo">
+    <div class="name" id="nameDisplay"></div>
+    <div class="class" id="classDisplay"></div>
+    <div class="details">
+      <div><b>Father's Name:</b> <span id="fatherDisplay"></span></div>
+      <div><b>Mother's Name:</b> <span id="motherDisplay"></span></div>
+      <div><b>Address:</b> <span id="addressDisplay"></span></div>
+    </div>
+ <div> <span id="phoneDisplay"></span></div>
+    <div class="footer">
+      <div class="school">EKLAVYA ITI CHAKLDI</div>
+<div class="CONTACTS"><b>📞CONTACT - 7772800654</b></div>
+    </div>
+
+<div class="CONTACTS"><b>EMAIL - itichakldi@gmail.com</b></div>
+    </div>
+  </div>  
+<div class="button-container">
+    <button class="btn" onclick="window.print()">Print Card</button>
+  </div>
+<script>
+    function generateID() {
+      const name = document.getElementById('studentName').value;
+      const className = document.getElementById('class').value;
+      const father = document.getElementById('fatherName').value;
+      const mother = document.getElementById('motherName').value;
+      const address = document.getElementById('address').value;
+      const phone = document.getElementById('phone').value;
+
+      document.getElementById('nameDisplay').innerText = name;
+      document.getElementById('classDisplay').innerText = `CLASS - ${className}`;
+      document.getElementById('fatherDisplay').innerText = father;
+      document.getElementById('motherDisplay').innerText = mother;
+      document.getElementById('addressDisplay').innerText = address;
+      document.getElementById('phoneDisplay').innerText = phone;
+
+      const fileInput = document.getElementById('photoInput');
+      const file = fileInput.files[0];
+
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          document.getElementById('profilePic').src = e.target.result;
+          document.getElementById('idCard').style.display = 'block';
+        }
+        reader.readAsDataURL(file);
+      } else {
+        alert("Please upload a photo");
+      }
+    }
+  </script></body>
+</html>
